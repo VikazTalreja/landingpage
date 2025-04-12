@@ -88,7 +88,7 @@ export default function Hero() {
             },
             particles: {
               number: {
-                value: 0, // Start with no particles, emitters will create them
+                value: 10, // Start with no particles, emitters will create them
                 density: {
                   enable: true,
                   value_area: 800
@@ -137,77 +137,98 @@ export default function Hero() {
               move: {
                 enable: true,
                 speed: 1,
-                random: true, // Make movement random for thrown effect
+                random: true,
                 straight: false,
-                out_mode: "destroy", // Remove particles when they go out of bounds
+                out_mode: "destroy",
                 bounce: false,
                 attract: {
                   enable: false,
                   rotateX: 600,
                   rotateY: 1200
                 }
+              },
+              life: {
+                duration: {
+                  value: 5,
+                  sync: false
+                },
+                count: 10
               }
             },
             retina_detect: true,
             emitters: [ // Make it an array of emitters so we can control each
               {
-                direction: "auto", // Let the initial velocity decide the direction
+                direction: "auto",
                 life: {
                   count: 0,
                   duration: 0.1,
                   delay: 0.1
                 },
                 rate: {
-                  delay: 0.5, // Reduced delay for burst
-                  quantity: 10 // increased quantity for burst
+                  delay: 0.5,
+                  quantity: 10
                 },
-                shape: "square", // Emit from a point
-                position: {  // Use position Instead of Start POsition
-                  x: 0, // Start from the left side
-                  y: 0 //Start From Top
+                shape: "square",
+                position: {
+                  x: 0,
+                  y: 0
                 },
                 size: {
-                  width: 50, // Point source
-                  height: 100 // Point source
+                  width: 50,
+                  height: 100
                 },
-                particles: { // Add initial velocity here
+                particles: {
                   move: {
                     speed: 0.6,
-                    direction: "bottom-right", // initial direction
+                    direction: "bottom-right",
                     outModes: {
-                      default: "destroy",
+                      default: "destroy"
                     }
                   },
+                  life: {
+                    duration: {
+                      value: 5,
+                      sync: false
+                    },
+                    count: 1
+                  }
                 }
               },
               {
-                direction: "auto", // Let the initial velocity decide the direction
+                direction: "auto",
                 life: {
                   count: 0,
                   duration: 0.1,
                   delay: 0.1
                 },
                 rate: {
-                  delay: 0.5, // Reduced delay for burst
-                  quantity: 10 // increased quantity for burst
+                  delay: 0.5,
+                  quantity: 10
                 },
-                shape: "square", // Emit from a point
-                position: {  // Use position Instead of Start POsition
-                  x: 100, //right
-                  y: 0 //Start From Top
+                shape: "square",
+                position: {
+                  x: 100,
+                  y: 0
                 },
                 size: {
-                  width: 50, // Point source
-                  height: 100 // Point source
+                  width: 50,
+                  height: 100
                 },
-                particles: { // Add initial velocity here
+                particles: {
                   move: {
                     speed: 0.6,
-                    direction: "bottom-left", // initial direction, CHANGE THIS
+                    direction: "bottom-left",
                     outModes: {
-                      default: "destroy",
+                      default: "destroy"
                     }
                   },
+                  life: {
+                    duration: {
+                      value: 5,
+                      sync: false
+                    },
+                    count: 1
+                  }
                 }
               }
             ]

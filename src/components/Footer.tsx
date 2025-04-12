@@ -4,83 +4,110 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="bg-purple-700 text-white py-16">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* USA Location */}
-          <div>
-            <div className="flex items-center mb-3">
-              <Image 
-                src="/vercel.svg" 
-                alt="USA Flag" 
-                width={20} 
-                height={20}
-                className="mr-2"
-              />
-              <h3 className="text-lg font-semibold">USA</h3>
-            </div>
-            <p className="text-sm mb-1">128 King St</p>
-            <p className="text-sm mb-1">San Francisco, CA 94107</p>
-            <p className="text-sm font-semibold">Mob: (415) 318-9192</p>
-          </div>
-
-          {/* India Location */}
-          <div>
-            <div className="flex items-center mb-3">
-              <Image 
-                src="/vercel.svg" 
-                alt="India Flag" 
-                width={20} 
-                height={20}
-                className="mr-2"
-              />
-              <h3 className="text-lg font-semibold">India</h3>
-            </div>
-            <p className="text-sm mb-1">Entvin Labs Pvt. Ltd. No 351 Salarpuria</p>
-            <p className="text-sm mb-1">Towers-1, Hosur Road, Koramangala,</p>
-            <p className="text-sm mb-1">Bengaluru, Karnataka, India- 560095</p>
-          </div>
-
-          {/* Product Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Product</h3>
-            <ul className="space-y-2">
-              <li><Link href="#problems" className="text-sm hover:text-purple-300">Problems</Link></li>
-              <li><Link href="#agents" className="text-sm hover:text-purple-300">Our Agents</Link></li>
-              <li><Link href="#teams" className="text-sm hover:text-purple-300">Teams</Link></li>
-              <li><Link href="#about" className="text-sm hover:text-purple-300">About us</Link></li>
-            </ul>
-          </div>
-
-          {/* Company & Connect Links */}
-          <div className="grid grid-cols-1 gap-10">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Company</h3>
-              <ul className="space-y-2">
-                <li><Link href="#terms" className="text-sm hover:text-purple-300">Terms & Conditions</Link></li>
-                <li><Link href="#security" className="text-sm hover:text-purple-300">Security</Link></li>
-              </ul>
+    <footer className="bg-[#2d1a5b] text-white py-16">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left Section (Workers + Quicklinks) */}
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-4">
+              {/* Logo */}
+              <div className="bg-[#8b5cf6]/30 p-6 rounded-lg">
+                <Link href="/" className="block">
+                  <div className="flex items-center">
+                    <Image src="/11x-logo.svg" alt="11x Logo" width={40} height={40} className="mr-2" />
+                    <span className="text-2xl font-bold">11x</span>
+                  </div>
+                </Link>
+              </div>
+              
+              {/* Workers */}
+              <div className="bg-[#8b5cf6]/30 p-6 rounded-lg">
+                <h2 className="text-lg font-semibold mb-2">Workers</h2>
+                <ul className="space-y-2">
+                  <li><Link href="/worker/alice" className="hover:text-blue-300">Alice</Link></li>
+                  <li><Link href="/worker/julian" className="hover:text-blue-300">Julian</Link></li>
+                </ul>
+              </div>
             </div>
             
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Connect us</h3>
-              <ul className="space-y-2">
-                <li><Link href="https://linkedin.com" className="text-sm hover:text-purple-300 flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mr-2" viewBox="0 0 16 16">
-                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                  </svg>
-                  LinkedIn
-                </Link></li>
-                <li><Link href="mailto:founders@entvin.com" className="text-sm hover:text-purple-300">founders@entvin.com</Link></li>
-              </ul>
+            {/* Quicklinks */}
+            <div className="h-full">
+              <div className="bg-[#8b5cf6]/30 p-6 rounded-lg h-full">
+                <h2 className="text-lg font-semibold mb-2">Quicklinks</h2>
+                <ul className="space-y-2">
+                  <li><Link href="/" className="hover:text-blue-300">Home</Link></li>
+                  <li><Link href="/about-us" className="hover:text-blue-300">Company</Link></li>
+                  <li><Link href="/become-a-partner" className="hover:text-blue-300">Partners</Link></li>
+                  <li><Link href="/blog" className="hover:text-blue-300">Blog</Link></li>
+                  <li><Link href="/security" className="hover:text-blue-300">Security</Link></li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Bottom section with Y Combinator and copyright */}
-        <div className="mt-16 pt-8 border-t border-purple-800 flex flex-col items-center">
-         
-          <p className="text-sm">© Entvin, Inc. 2025 — All rights reserved.</p>
+          
+          {/* Right Section */}
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-4 gap-4">
+              {/* San Francisco */}
+              <div className="col-span-4 bg-[#8b5cf6]/30 p-4 rounded-lg">
+                <div className="flex items-center mb-1">
+                  <div className="w-5 h-5 rounded-full bg-black bg-opacity-30 flex items-center justify-center mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 22 22" fill="none">
+                      <path d="M10.7143 5C9.46445 5.00142 8.26616 5.49856 7.38236 6.38236C6.49856 7.26616 6.00142 8.46445 6 9.71433C6 13.7483 10.2858 16.7949 10.4684 16.9224C10.5405 16.9729 10.6263 17 10.7143 17C10.8023 17 10.8882 16.9729 10.9602 16.9224C11.1429 16.7949 15.4287 13.7483 15.4287 9.71433C15.4272 8.46445 14.9301 7.26616 14.0463 6.38236C13.1625 5.49856 11.9642 5.00142 10.7143 5ZM10.7143 8.00003C11.0534 8.00003 11.3848 8.10057 11.6667 8.28894C11.9487 8.47731 12.1684 8.74505 12.2981 9.0583C12.4279 9.37155 12.4618 9.71623 12.3957 10.0488C12.3295 10.3813 12.1663 10.6868 11.9265 10.9265C11.6868 11.1663 11.3813 11.3295 11.0488 11.3957C10.7162 11.4618 10.3715 11.4279 10.0583 11.2981C9.74505 11.1684 9.47731 10.9487 9.28894 10.6667C9.10057 10.3848 9.00003 10.0534 9.00003 9.71433C9.00003 9.25967 9.18064 8.82363 9.50214 8.50214C9.82363 8.18064 10.2597 8.00003 10.7143 8.00003Z" fill="white" />
+                    </svg>
+                  </div>
+                  <span className="font-medium">San Francisco</span>
+                </div>
+                <p className="text-sm">United States, 677 Harrison Street, San Francisco, CA 94107</p>
+              </div>
+              
+              {/* UK Address */}
+              <div className="col-span-2 bg-[#8b5cf6]/30 p-4 rounded-lg">
+                <div className="flex items-center mb-1">
+                  <div className="w-5 h-5 rounded-full bg-black bg-opacity-30 flex items-center justify-center mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 22 22" fill="none">
+                      <path d="M10.7143 5C9.46445 5.00142 8.26616 5.49856 7.38236 6.38236C6.49856 7.26616 6.00142 8.46445 6 9.71433C6 13.7483 10.2858 16.7949 10.4684 16.9224C10.5405 16.9729 10.6263 17 10.7143 17C10.8023 17 10.8882 16.9729 10.9602 16.9224C11.1429 16.7949 15.4287 13.7483 15.4287 9.71433C15.4272 8.46445 14.9301 7.26616 14.0463 6.38236C13.1625 5.49856 11.9642 5.00142 10.7143 5ZM10.7143 8.00003C11.0534 8.00003 11.3848 8.10057 11.6667 8.28894C11.9487 8.47731 12.1684 8.74505 12.2981 9.0583C12.4279 9.37155 12.4618 9.71623 12.3957 10.0488C12.3295 10.3813 12.1663 10.6868 11.9265 10.9265C11.6868 11.1663 11.3813 11.3295 11.0488 11.3957C10.7162 11.4618 10.3715 11.4279 10.0583 11.2981C9.74505 11.1684 9.47731 10.9487 9.28894 10.6667C9.10057 10.3848 9.00003 10.0534 9.00003 9.71433C9.00003 9.25967 9.18064 8.82363 9.50214 8.50214C9.82363 8.18064 10.2597 8.00003 10.7143 8.00003Z" fill="white" />
+                    </svg>
+                  </div>
+                  <span className="font-medium">United Kingdom</span>
+                </div>
+                <p className="text-sm">United Kingdom, Brickfields Workspace, London, E2 8HD</p>
+              </div>
+              
+              {/* Legal Links */}
+              <div className="col-span-2 bg-[#8b5cf6]/30 p-4 rounded-lg">
+                <Link href="/legal/privacy-policy" className="block hover:text-blue-300">Privacy Policy</Link>
+                <Link href="/legal/terms" className="block hover:text-blue-300">Terms & Conditions</Link>
+                <Link href="/legal/website-tracking-privacy-policy" className="block hover:text-blue-300 text-sm">Website Tracking Policy</Link>
+              </div>
+              
+              {/* Social Media */}
+              <div className="col-span-2 bg-[#8b5cf6]/30 p-4 rounded-lg flex items-center space-x-4">
+                <a href="https://www.linkedin.com/company/11x-ai/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 33" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M6 4.82373C4.89543 4.82373 4 5.71916 4 6.82373V26.8237C4 27.9283 4.89543 28.8237 6 28.8237H26C27.1045 28.8237 28 27.9283 28 26.8237V6.82373C28 5.71916 27.1045 4.82373 26 4.82373H6ZM11.361 10.1607C11.3685 11.4357 10.4141 12.2213 9.28164 12.2157C8.21476 12.2101 7.28476 11.3607 7.29039 10.1626C7.29601 9.03569 8.18664 8.13006 9.34352 8.15632C10.5173 8.18257 11.3685 9.0432 11.361 10.1607ZM16.3729 13.8394H13.0129H13.0111V25.2525H16.5623V24.9863C16.5623 24.4797 16.5619 23.9731 16.5615 23.4663C16.5604 22.1145 16.5592 20.7613 16.5661 19.41C16.568 19.0819 16.5829 18.7407 16.6673 18.4275C16.9841 17.2575 18.0361 16.5019 19.2099 16.6876C19.9636 16.8056 20.4623 17.2425 20.6723 17.9532C20.8017 18.3975 20.8599 18.8756 20.8655 19.3388C20.8807 20.7356 20.8785 22.1324 20.8764 23.5293C20.8756 24.0224 20.8748 24.5157 20.8748 25.0088V25.2507H24.4373V24.9769C24.4373 24.3743 24.4371 23.7717 24.4367 23.1692C24.436 21.6632 24.4352 20.1572 24.4392 18.6507C24.4411 17.97 24.368 17.2988 24.2011 16.6407C23.9517 15.6619 23.4361 14.8519 22.598 14.2669C22.0036 13.8507 21.3511 13.5825 20.6217 13.5525C20.5387 13.5491 20.4549 13.5446 20.3708 13.54C19.9979 13.5199 19.6188 13.4994 19.2623 13.5713C18.2423 13.7757 17.3461 14.2425 16.6692 15.0656C16.5905 15.16 16.5136 15.2559 16.3988 15.3989L16.3729 15.4313V13.8394ZM7.57552 25.2563H11.1099V13.8468H7.57552V25.2563Z" fill="currentColor" />
+                  </svg>
+                </a>
+                <a href="https://x.com/11x_official" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 33" fill="none">
+                    <path d="M22.9015 6.15674H26.5816L18.5415 15.1933L28 27.4901H20.5941L14.7935 20.0322L8.15631 27.4901H4.47392L13.0736 17.8245L4 6.15674H11.5939L16.8372 12.9736L22.9015 6.15674ZM21.6097 25.3239H23.6491L10.4859 8.20911H8.2976L21.6097 25.3239Z" fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+              
+              {/* Certification */}
+              <div className="col-span-2 bg-[#8b5cf6]/30 p-4 rounded-lg flex items-center justify-center">
+                <a href="https://app.getdelve.com/11x" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67311f17856facccfe66988d_soc2.webp" alt="SOC2 Certification" className="h-10" />
+                </a>
+              </div>
+            </div>
+            
+            {/* Copyright */}
+            <div className="mt-4 text-sm text-center lg:text-left">
+              © All rights reserved 2025 11x AI Inc.
+            </div>
+          </div>
         </div>
       </div>
     </footer>

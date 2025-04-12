@@ -1,607 +1,322 @@
-"use client";
-import { useEffect, useRef } from 'react';
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const sections = [
-  {
-    title: "Meet Anita, Your AI HR Partner",
-    description: "Connect with our intelligent AI HR agent who understands your regulatory compliance needs and streamlines your workflow.",
-    isReversed: false,
-    boxContent: (
-      <div className="flex flex-col items-center justify-center h-full relative group">
-        <div className="absolute inset-0 bg-black " />
-        
-        {/* Video Container with Enhanced Glowing Border */}
-        <div className="video-container relative w-full h-full transform transition-transform duration-700">
-          {/* Multi-layered Glowing Border Effect */}
-          <div className="absolute -inset-[3px] bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-lg opacity-75 blur-md group-hover:opacity-100 animate-pulse-glow" />
-          <div className="absolute -inset-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg opacity-90" />
-          <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-lg opacity-50 animate-pulse" />
-          
-          {/* Corner Accents */}
-          <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-blue-500 rounded-tl-lg" />
-          <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-pink-500 rounded-tr-lg" />
-          <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-purple-500 rounded-bl-lg" />
-          <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-purple-500 rounded-br-lg" />
-          
-          {/* Video Element Container */}
-          <div className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center bg-black">
-            {/* Simple Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-10" />
-            
-            {/* Video */}
-            <video
-              className="w-full h-auto max-h-full object-contain opacity-0 scale-95 transform transition-all duration-1000"
-              src="/FirstImage.mp4"
-              loop
-              muted
-              playsInline
-              preload="auto"
-            />
-          </div>
-        </div>
+interface Section {
+  id: string;
+  title: string;
+  description: string;
+  subtitle?: string;
+  ctaText?: string;
+}
 
-        {/* Text Overlay with Futuristic Style */}
-        <div className="text-overlay absolute inset-0 flex flex-col items-center justify-center z-20 opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <div className="text-5xl font-bold text-white mb-8 text-center transform translate-y-4 transition-transform duration-300 group-hover:translate-y-0 relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-lg" />
-            <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 [text-shadow:0_0_15px_rgba(59,130,246,0.5)]">
-              AI-Powered HR
-            </span>
-            <div className="text-2xl mt-2 text-gray-300 font-light">
-              <span className="relative">
-                Revolutionize Your Workflow
-                <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              </span>
-            </div>
-          </div>
-          
-          {/* Enhanced Button */}
-          <button className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl overflow-hidden group/btn">
-            {/* Button Glow Effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover/btn:opacity-20 blur-xl transition-opacity duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-white/25 to-purple-400/0 transform translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />
-            
-            {/* Button Content */}
-            <span className="relative z-10 flex items-center">
-              Get Started
-              <svg className="w-5 h-5 ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </span>
-            
-            {/* Animated Corner Dots */}
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full animate-ping" />
-            <span className="absolute -bottom-1 -left-1 w-2 h-2 bg-purple-400 rounded-full animate-ping delay-100" />
-          </button>
-        </div>
-      </div>
-    )
+const sections: Section[] = [
+  {
+    id: 'hero',
+    title: 'Revolutionize Your HR Experience',
+    subtitle: 'AI-Powered HR Solutions',
+    description: 'Transform your hiring process with cutting-edge AI technology. Experience seamless candidate screening, automated compliance checks, and data-driven decision making.',
+    ctaText: 'Get Started'
   },
   {
-    title: "Secure Network Connection",
-    description: "Our advanced AI network analyzes your specific regulatory requirements and compliance needs in real-time, ensuring a perfect match.",
-    isReversed: true,
-    boxContent: (
-      <div className="flex items-center justify-center h-full relative">
-        <div className="absolute inset-0 bg-transparent" />
-        
-        <div className="w-full max-w-md relative">
-          <div className="flex items-center justify-between">
-            {/* Agent Entity */}
-            <div className="flex flex-col items-center">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 p-0.5">
-                  <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
-                    <span className="text-3xl">🤖</span>
-                  </div>
-                </div>
-              </div>
-              <span className="mt-2 text-xs font-medium text-gray-300">AGENT</span>
-            </div>
-            
-            {/* User Entity */}
-            <div className="flex flex-col items-center">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 animate-pulse" 
-                     style={{ animationDelay: '1.5s' }} />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 p-0.5 opacity-0"
-                     style={{ animation: 'appear 0.5s ease-in forwards', animationDelay: '1.5s' }}>
-                  <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
-                    <span className="text-3xl">👤</span>
-                  </div>
-                </div>
-              </div>
-              <span className="mt-2 text-xs font-medium text-gray-300 opacity-0"
-                    style={{ animation: 'appear 0.5s ease-in forwards', animationDelay: '1.8s' }}>USER</span>
-            </div>
-          </div>
-          
-          {/* Connection Line */}
-          <div className="absolute left-16 right-16 top-8 h-0.5">
-            <div className="w-full h-full flex items-center justify-between">
-              {Array.from({ length: 15 }).map((_, i) => (
-                <div key={i} className="w-0.5 h-0.5 rounded-full bg-gray-600" />
-              ))}
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 transform origin-left scale-x-0" 
-                 style={{ animation: 'progress 1.5s ease-in-out forwards' }} />
-            <div className="absolute inset-0">
-              <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1.5 h-1.5 rounded-full bg-purple-400"
-                   style={{ animation: 'dataMove 1.5s ease-in forwards' }} />
-              <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1.5 h-1.5 rounded-full bg-pink-400"
-                   style={{ animation: 'dataMove 1.5s ease-in forwards', animationDelay: '0.3s' }} />
-              <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1.5 h-1.5 rounded-full bg-blue-400"
-                   style={{ animation: 'dataMove 1.5s ease-in forwards', animationDelay: '0.6s' }} />
-            </div>
-          </div>
-  
-          {/* Status Text */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-center">
-            <div className="inline-block px-3 py-1 rounded-full bg-gray-800/50 border border-gray-700/50"
-                 style={{ animation: 'appear 0.5s ease-in forwards' }}>
-              <div className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs text-gray-300 font-medium">CONNECTING...</span>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <style jsx>{`
-          @keyframes progress {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-          }
-          @keyframes dataMove {
-            to { left: calc(100% - 0.375rem); }
-          }
-          @keyframes appear {
-            to { opacity: 1; }
-          }
-        `}</style>
-      </div>
-    )
+    id: 'features',
+    title: 'Smart HR Automation',
+    subtitle: 'Powered by Advanced AI',
+    description: 'Leverage machine learning algorithms to streamline your recruitment process, ensure compliance, and make data-driven hiring decisions.',
+    ctaText: 'Learn More'
   },
   {
-    title: "Expert Skill Assessment",
-    description: "Watch as our AI agent demonstrates its expertise in key regulatory areas, ensuring comprehensive compliance coverage for your needs.",
-    isReversed: false,
-  
+    id: 'benefits',
+    title: 'Enhanced Decision Making',
+    subtitle: 'Data-Driven Insights',
+    description: 'Get real-time analytics and insights to make informed decisions. Our AI analyzes patterns and predicts candidate success with high accuracy.',
+    ctaText: 'See How It Works'
   },
   {
-    title: "Perfect Match Found!",
-    description: "Your ideal AI compliance partner has been identified. Ready to revolutionize your regulatory workflow with intelligent automation?",
-    isReversed: true,
-  
+    id: 'action',
+    title: 'Ready to Transform Your HR?',
+    subtitle: 'Join Industry Leaders',
+    description: 'Join thousands of companies already using our AI-powered HR solution to build better teams and drive growth.',
+    ctaText: 'Start Free Trial'
   }
 ];
 
-export const MainAnimation = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
+const MainAnimation: React.FC = () => {
+  const [activeSection, setActiveSection] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const boxRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const textOverlayRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const boxes = boxRefs.current;
-    if (!cursor || !boxes.every(box => box)) return;
+    const initAnimations = () => {
+      sectionRefs.current.forEach((section, index) => {
+        if (!section) return;
 
-    // Initial cursor animation - enter from right
-    gsap.set(cursor, {
-      x: window.innerWidth,
-      y: window.innerHeight / 2,
-      opacity: 0
-    });
-
-    const masterTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1,
-      }
-    });
-
-    // Video animation setup
-    const firstBox = boxes[0];
-    if (firstBox) {
-      const video = firstBox.querySelector('video');
-      const button = firstBox.querySelector('button');
-      const textOverlay = firstBox.querySelector('.text-overlay');
-      
-      if (video && button && textOverlay) {
-        // Create a scroll trigger for the video
+        // Create scroll trigger for each section
         ScrollTrigger.create({
-          trigger: firstBox,
+          trigger: section,
           start: "top center",
-          onEnter: () => {
-            const tl = gsap.timeline();
-
-            // Only animate the video in
-            tl.to(video, {
-              opacity: 1,
-              scale: 1,
-              duration: 1,
-              ease: "power2.out",
-              onComplete: () => {
-                video.play();
-              }
-            });
-          }
-        });
-
-        // Keep only the button hover effect
-        button.addEventListener('mouseenter', () => {
-          gsap.to(button, {
-            scale: 1.05,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-        });
-
-        button.addEventListener('mouseleave', () => {
-          gsap.to(button, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.in"
-          });
-        });
-      }
-    }
-
-    // Animate boxes
-    boxes.forEach((box, index) => {
-      if (!box) return;
-      
-      gsap.from(box, {
-        scrollTrigger: {
-          trigger: box,
-          start: "top center+=100",
           end: "bottom center",
-          toggleActions: "play none none reverse"
-        },
-        opacity: 0,
-        x: index % 2 === 0 ? 100 : -100,
-        duration: 1,
-        ease: "power2.out"
+          onEnter: () => setActiveSection(index),
+          onEnterBack: () => setActiveSection(index),
+        });
+
+        // Animate section elements with stagger
+        const elements = section.querySelectorAll('.animate-on-scroll');
+        gsap.fromTo(elements, 
+          { 
+            y: 50, 
+            opacity: 0 
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "center center",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
       });
-    });
+
+      // Parallax background effect
+      gsap.to(".parallax-bg", {
+        y: "30%",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1
+        }
+      });
+    };
+
+    const timer = setTimeout(initAnimations, 500);
 
     return () => {
+      clearTimeout(timer);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
-  return (
-    <div ref={containerRef} className="py-20 relative">
-      {/* Improved background gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(13,17,32,0.7),rgba(2,6,23,1))]" />
-      <div 
-        ref={cursorRef}
-        className="fixed w-8 h-8 z-50 pointer-events-none"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      >
-        <div className="w-full h-full relative">
-          <div className="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-30" />
-          <Image
-            src="/cursor.png"
-            alt="Cursor"
-            width={32}
-            height={32}
-            className="relative z-10"
-          />
-        </div>
-      </div>
-      
-      {sections.map((section, index) => (
-        <div 
-          key={index}
-          className={`relative z-10 flex items-center justify-between max-w-7xl mx-auto px-6 mb-32 ${
-            section.isReversed ? 'flex-row-reverse' : ''
-          }`}
-        >
-          <div className="w-1/2 pr-12">
-            <h2 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
-              {section.title}
-            </h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              {section.description}
-            </p>
-          </div>
-          
-          <div 
-            ref={(el) => {
-              boxRefs.current[index] = el;
-            }}
-            className="w-1/2 h-[400px] bg-gray-900/30 backdrop-blur-md rounded-lg shadow-2xl transform transition-all duration-500 hover:scale-105 border border-gray-800/50 overflow-hidden"
-          >
-            {index === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
-                
-                {/* Video Container with Enhanced Glowing Border */}
-                <div className="video-container relative w-full h-full transform transition-transform duration-700">
-                  {/* Multi-layered Glowing Border Effect */}
-                  <div className="absolute -inset-[3px] bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-lg opacity-75 blur-md group-hover:opacity-100 animate-pulse-glow" />
-                  <div className="absolute -inset-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg opacity-90" />
-                  <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-lg opacity-50 animate-pulse" />
-                  
-                  {/* Corner Accents */}
-                  <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-blue-500 rounded-tl-lg" />
-                  <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-pink-500 rounded-tr-lg" />
-                  <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-purple-500 rounded-bl-lg" />
-                  <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-purple-500 rounded-br-lg" />
-                  
-                  {/* Video Element Container */}
-                  <div className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center bg-black">
-                    {/* Simple Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-10" />
-                    
-                    {/* Video */}
-                    <video
-                      className="w-full h-auto max-h-full object-contain opacity-0 scale-95 transform transition-all duration-1000"
-                      src="/FirstImage.mp4"
-                      loop
-                      muted
-                      playsInline
-                      preload="auto"
-                    />
-                  </div>
-                </div>
+  const addToRefs = (el: HTMLDivElement | null, index: number) => {
+    if (el && !sectionRefs.current[index]) {
+      sectionRefs.current[index] = el;
+    }
+  };
 
-                {/* Text Overlay with Futuristic Style */}
-                <div className="text-overlay absolute inset-0 flex flex-col items-center justify-center z-20 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                  <div className="text-5xl font-bold text-white mb-8 text-center transform translate-y-4 transition-transform duration-300 group-hover:translate-y-0 relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-lg" />
-                    <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 [text-shadow:0_0_15px_rgba(59,130,246,0.5)]">
-                      AI-Powered HR
-                    </span>
-                    <div className="text-2xl mt-2 text-gray-300 font-light">
-                      <span className="relative">
-                        Revolutionize Your Workflow
-                        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                      </span>
+  const addToBoxRefs = (el: HTMLDivElement | null, index: number) => {
+    if (el && !boxRefs.current[index]) {
+      boxRefs.current[index] = el;
+    }
+  };
+
+  return (
+    <div className="relative min-h-screen bg-black overflow-hidden" ref={containerRef}>
+      {/* Animated background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[40%] -left-[20%] w-[100%] h-[100%] bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-[100px] parallax-bg" />
+        <div className="absolute -bottom-[40%] -right-[20%] w-[100%] h-[100%] bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-[100px] parallax-bg" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:radial-gradient(white,transparent_85%)] opacity-20" />
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {sections.map((section, index) => (
+          <div
+            key={section.id}
+            ref={(el) => addToRefs(el, index)}
+            className={`min-h-screen flex items-center py-24 ${
+              activeSection === index ? 'opacity-100' : 'opacity-50'
+            } transition-opacity duration-500`}
+          >
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Content side */}
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <span className="animate-on-scroll inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 text-lg font-medium">
+                    {section.subtitle}
+                  </span>
+                  <h2 className="animate-on-scroll text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                    {section.title}
+                  </h2>
+                  <p className="animate-on-scroll text-xl text-gray-300 leading-relaxed max-w-xl">
+                    {section.description}
+                  </p>
+                </div>
+                
+                <button className="animate-on-scroll group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
+                  <span className="relative z-10">{section.ctaText}</span>
+                  <div className="absolute inset-0 -translate-x-full hover:translate-x-0 bg-gradient-to-r from-purple-600 to-blue-600 transition-transform duration-500 ease-out" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_white_0%,_transparent_100%)]" />
+                  </div>
+                </button>
+              </div>
+
+              {/* Visual side */}
+              <div className="relative">
+                {index === 0 && (
+                  <div className="relative h-[80vh] rounded-xl overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20 backdrop-blur-sm border border-white/10">
+                      <div className="video-container relative w-full h-full overflow-hidden">
+                        <video
+                          ref={videoRef}
+                          src="/FirstImage.mp4"
+                          className="w-full h-full object-cover"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        
+                        {/* Interactive elements */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <button className="px-8 py-3 bg-white text-black rounded-lg font-medium shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                              Watch Demo
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Enhanced Button */}
-                  <button className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl overflow-hidden group/btn">
-                    {/* Button Glow Effects */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover/btn:opacity-20 blur-xl transition-opacity duration-300" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-white/25 to-purple-400/0 transform translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />
-                    
-                    {/* Button Content */}
-                    <span className="relative z-10 flex items-center">
-                      Get Started
-                      <svg className="w-5 h-5 ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                    
-                    {/* Animated Corner Dots */}
-                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full animate-ping" />
-                    <span className="absolute -bottom-1 -left-1 w-2 h-2 bg-purple-400 rounded-full animate-ping delay-100" />
-                  </button>
-                </div>
+                )}
+
+                {index === 1 && (
+                  <div className="relative h-96 rounded-xl bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-8 backdrop-blur-sm border border-white/10 overflow-hidden group">
+                    <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+                    <div className="relative z-10 h-full flex items-center justify-center">
+                      <div className="space-y-6 text-center">
+                        <div className="flex justify-center">
+                          <div className="relative">
+                            <div className="w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="h-2 w-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse" />
+                          <div className="h-2 w-36 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse delay-75" />
+                          <div className="h-2 w-24 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse delay-150" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {index === 2 && (
+                  <div className="relative h-96 rounded-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 p-8 backdrop-blur-sm border border-white/10 overflow-hidden">
+                    <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+                    <div className="relative z-10 h-full grid grid-cols-2 gap-4">
+                      {[...Array(4)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="relative rounded-lg bg-white/5 p-4 backdrop-blur-sm border border-white/10 group hover:bg-white/10 transition-colors duration-300"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          <div className="relative z-10">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mb-4 flex items-center justify-center">
+                              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <div className="h-4 w-20 bg-white/20 rounded mb-2" />
+                            <div className="h-3 w-16 bg-white/10 rounded" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {index === 3 && (
+                  <div className="relative h-96 rounded-xl bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-8 backdrop-blur-sm border border-white/10 overflow-hidden">
+                    <div className="absolute inset-0">
+                      <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" />
+                    </div>
+                    <div className="relative z-10 h-full flex items-center justify-center">
+                      <div className="text-center space-y-6">
+                        <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                          <span className="text-white text-sm font-medium">Live Demo Available</span>
+                        </div>
+                        <div className="space-y-4">
+                          <div className="flex justify-center space-x-4">
+                            {[...Array(3)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="w-3 h-12 bg-gradient-to-t from-blue-500 to-purple-500 rounded-full"
+                                style={{ animation: `bounce 1s ease-in-out ${i * 0.15}s infinite` }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            ) : (
-              section.boxContent
-            )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Navigation dots */}
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 space-y-4 z-50">
+        {sections.map((section, index) => (
+          <button
+            key={section.id}
+            onClick={() => {
+              sectionRefs.current[index]?.scrollIntoView({ behavior: 'smooth' });
+              setActiveSection(index);
+            }}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              activeSection === index
+                ? 'bg-white scale-150 shadow-lg shadow-white/50'
+                : 'bg-white/30 hover:bg-white/50'
+            }`}
+            aria-label={`Go to ${section.title}`}
+          />
+        ))}
+      </div>
+
+      {/* Scroll indicator */}
+      <div className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${
+        hasScrolled ? 'opacity-0' : 'opacity-100'
+      }`}>
+        <div className="flex flex-col items-center space-y-2">
+          <span className="text-white/60 text-sm">Scroll to explore</span>
+          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-2">
+            <div className="w-1 h-2 bg-white rounded-full animate-bounce" />
           </div>
         </div>
-      ))}
+      </div>
+
+      <style jsx>{`
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+      `}</style>
     </div>
   );
 };
 
-<style jsx>{`
-  @keyframes grow-line {
-    from {
-      transform: scaleX(0) translateY(-50%);
-    }
-    to {
-      transform: scaleX(1) translateY(-50%);
-    }
-  }
-
-  @keyframes move-dot {
-    0% {
-      left: 0%;
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    80% {
-      opacity: 1;
-    }
-    100% {
-      left: 100%;
-      opacity: 0;
-    }
-  }
-
-  @keyframes progress {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-  .animate-grow-line {
-    animation: grow-line 1s ease-out forwards;
-  }
-
-  .animate-move-dot {
-    animation: move-dot 3s linear infinite;
-  }
-
-  .animate-progress {
-    animation: progress 2s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes skillAppear {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .skill-box {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.1), transparent);
-    transform: translateX(-100%);
-    animation: skillGlow 2s ease-in-out infinite;
-  }
-
-  @keyframes skillGlow {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  .hire-btn, .reject-btn {
-    animation: fadeIn 0.5s ease-out 1s forwards;
-  }
-
-  .hire-glow {
-    animation: hireGlow 2s ease-out 3s forwards;
-  }
-
-  @keyframes hireGlow {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 0.4;
-    }
-  }
-
-  .neural-network {
-    position: relative;
-  }
-
-  @keyframes pulse-opacity {
-    0%, 100% {
-      opacity: 0.2;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  .animate-pulse-opacity {
-    animation: pulse-opacity 2s ease-in-out infinite;
-  }
-
-  .connection-line {
-    animation: draw 1s ease-out forwards;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-  }
-
-  @keyframes draw {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  /* Connection progress animation */
-  .connection-progress {
-    animation: progress 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Data dot animation */
-  .data-dot {
-    opacity: 0;
-    animation: dataDotMove 2s cubic-bezier(0.4, 0, 0.2, 1) var(--delay) infinite;
-  }
-
-  @keyframes dataDotMove {
-    0% {
-      left: 0%;
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      left: 100%;
-      opacity: 0;
-    }
-  }
-
-  /* AI appearance animations */
-  .ai-appear {
-    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
-  }
-
-  .ai-pulse {
-    opacity: 0;
-    animation: aiPulse 3s cubic-bezier(0.4, 0, 0.2, 1) 2.5s infinite;
-  }
-
-  .ai-text-appear {
-    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2.3s forwards;
-  }
-
-  @keyframes aiPulse {
-    0% {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    50% {
-      opacity: 0.3;
-      transform: scale(1.2);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-  }
-`}</style>
+export default MainAnimation;

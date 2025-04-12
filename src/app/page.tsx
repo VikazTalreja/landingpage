@@ -4,8 +4,6 @@ import Image from "next/image";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import { ParticleButton } from "@/components/ParticleButton";
-import FeaturesSectionDemo from "@/components/ui/features-section-demo-1";
-// import { MainAnimation } from "@/components/MainAnimation";
 import {
   Navbar,
   NavBody,
@@ -17,6 +15,15 @@ import {
   MobileNavMenu,
   NavbarButton
 } from "@/components/ui/resizable-navbar";
+import CallAnimationPage from "@/components/CallAnimation";
+import MainAnimation from "@/components/MainAnimation";
+import { FollowingPointerDemo } from "@/components/ScrollSection";
+import StickyScrollRevealDemo from "@/components/sticky-scroll-reveal-demo";
+import Mobilescroll from "@/components/MobileStickyScroll";
+import { SignupFormDemo } from "@/components/formExample";
+import AudioSection from "@/components/AudioSection";
+import TabSection from "@/components/TabSection";
+import WorkforceSection from "@/components/WorkforceSection";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -93,10 +100,10 @@ export default function Home() {
       
       {/* Hero content section */}
       <div className="relative z-20 flex min-h-screen flex-col items-center justify-center px-4 pt-16 text-center text-white">
-        <h1 className="text-5xl font-bold sm:text-6xl md:text-7xl">
-          Regulatory AI Agents
+        <h1 className="text-5xl font-medium sm:text-6xl md:text-8xl">
+        Your HR's new 
           <br />
-          <span className="font-playfair italic">for Lifescience</span>
+          <span className="font-playfair italic">best friend</span>
         </h1>
         
         <p className="mt-6 max-w-2xl text-xl">
@@ -117,14 +124,32 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Main Animation Section */}
-      {/* <div className="relative z-30 w-full">
-        <MainAnimation />
-      </div> */}
-
-      {/* Features Section */}
+      {/* CallAnimation section */}
       <div className="relative z-30 bg-black w-full">
-        <FeaturesSectionDemo />
+        <CallAnimationPage />
+      </div>
+
+      {/* Sticky Scroll Section */}
+      <div className="relative z-30 w-full hidden md:block">
+        <StickyScrollRevealDemo />
+      </div>
+      <div className="relative z-30 w-full md:hidden block">
+        <Mobilescroll />
+      </div>
+
+      {/* Workforce Section */}
+      <div className="relative z-30 w-full">
+        <WorkforceSection />
+      </div>
+
+      {/* Tab Section */}
+      <div className="relative z-30 w-full">
+        <TabSection />
+      </div>
+
+      {/* Audio Section */}
+      <div className="relative z-30 w-full">
+        <AudioSection />
       </div>
       
       <div className="relative z-30 bg-purple-600 w-full">

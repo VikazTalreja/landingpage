@@ -104,7 +104,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full  bg-transparent px-8 py-4 lg:flex dark:bg-transparent",
-        visible && "bg-purple-800",
+        visible && "bg-[#2d1a5b]",
         className,
       )}
     >
@@ -120,7 +120,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden  flex-1 flex-row items-center justify-center space-x-8 text-lg text-white font-medium  transition duration-200 hover:text-zinc-800 lg:flex",
+        "absolute inset-0 hidden  flex-1 flex-row items-center justify-center space-x-6 mx-7 text-lg text-white font-light  transition duration-200 hover:text-zinc-800 lg:flex",
         className,
       )}
     >
@@ -166,7 +166,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
+        visible && "bg-[#2d1a5b]",
         className,
       )}
     >
@@ -205,7 +205,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
+           "absolute inset-x-0 top-16 z-50 text-black flex w-full flex-col items-start justify-start gap-4 rounded-lg  px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
             className,
           )}
         >
@@ -226,15 +226,26 @@ export const MobileNavToggle = ({
   return isOpen ? (
     <IconX className="text-black dark:text-white" onClick={onClick} />
   ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+    <svg
+      onClick={onClick}
+      className="w-6 h-6 text-white dark:text-white"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
   );
 };
+
 
 export const NavbarLogo = () => {
   return (
     <Link
       href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-xl font-semibold text-black"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-xl font-semibold text-white"
     >
       {/* <Image
         src="/globe.svg"
@@ -242,7 +253,7 @@ export const NavbarLogo = () => {
         width={36}
         height={36}
       /> */}
-      <span className="font-medium text-white text-4xl">Meresu</span>
+      <span className="font-medium text-white text-2xl">Meresu</span>
     </Link>
   );
 };
@@ -269,7 +280,7 @@ export const NavbarButton = ({
       case "primary":
         return "bg-black hover:bg-gray-800 text-white border-transparent";
       case "secondary":
-        return "bg-white hover:bg-gray-100 text-purple-500 border-gray-300";
+        return "bg-white hover:bg-gray-100 text-black border-gray-300";
       case "dark":
         return "bg-neutral-800 hover:bg-neutral-900 text-white border-transparent";
       case "gradient":
