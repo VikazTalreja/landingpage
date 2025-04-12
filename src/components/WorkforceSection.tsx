@@ -171,17 +171,23 @@ const WorkforceSection = () => {
                           }}
                           onClick={() => !isActive && handleNavClick(index)}
                         >
-                          <div className={`relative aspect-video bg-white rounded-xl shadow-lg overflow-hidden ${isActive ? 'ring-2 ring-black/10' : ''} ${!isActive ? 'cursor-pointer' : ''}`}>
-                            {item.type === 'video' ? (
-                              <VideoBackground item={item} isActive={isActive} />
-                            ) : (
-                              <img 
-                                src={item.src} 
-                                loading="lazy" 
-                                alt={item.title}
-                                className="w-full h-full object-cover"
-                              />
-                            )}
+                          <div className="flex flex-col">
+                            <div className={`relative aspect-video bg-white rounded-xl shadow-lg overflow-hidden ${isActive ? 'ring-2 ring-black/10' : ''} ${!isActive ? 'cursor-pointer' : ''}`}>
+                              {item.type === 'video' ? (
+                                <VideoBackground item={item} isActive={isActive} />
+                              ) : (
+                                <img 
+                                  src={item.src} 
+                                  loading="lazy" 
+                                  alt={item.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              )}
+                            </div>
+                            <div className={`mt-4 text-center justify-start  transition-opacity duration-300`}>
+                              <h3 className="text-lg font-semibold text-gray-900 text-left mb-1">{item.title}</h3>
+                              <p className="text-sm text-gray-600 text-left">{item.description}</p>
+                            </div>
                           </div>
                         </div>
                       );
