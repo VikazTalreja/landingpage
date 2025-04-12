@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 import {
   motion,
   AnimatePresence,
@@ -9,7 +9,6 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import Image from "next/image";
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -46,7 +45,6 @@ interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
-  onClose: () => void;
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
@@ -195,7 +193,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -239,7 +236,6 @@ export const MobileNavToggle = ({
     </svg>
   );
 };
-
 
 export const NavbarLogo = () => {
   return (
@@ -296,7 +292,7 @@ export const NavbarButton = ({
   if (typeof children !== "undefined") {
     return (
       <Tag
-        {...(props as {})}
+        {...props}
         href={href}
         className={cn(
           baseClasses,

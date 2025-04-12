@@ -107,7 +107,16 @@ export const Grid = ({
   );
 };
 
-export function GridPattern({ width, height, x, y, squares, ...props }: any) {
+interface GridPatternProps {
+  width: number;
+  height: number;
+  x: number | string;
+  y: number | string;
+  squares?: number[][];
+  className?: string;
+}
+
+export function GridPattern({ width, height, x, y, squares, ...props }: GridPatternProps) {
   const patternId = useId();
 
   return (
