@@ -67,7 +67,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     <motion.div
       ref={ref}
       // Changed to fixed position
-      className={cn("fixed inset-x-0 top-0 z-40 w-full", className)}
+      className={cn("fixed inset-x-0 top-3 z-40 w-full", className)}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -102,7 +102,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-bg-[#2d1a5b] px-3 py-2 lg:flex dark:bg-bg-[#2d1a5b]",
-        visible && "bg-[#2d1a5b] shadow-xl shadow-black/20",
+        visible && "bg-[#0a2532] shadow-xl shadow-black/20",
         className,
       )}
     >

@@ -49,7 +49,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{
-          backgroundImage: 'url(/OutBg.avif)',
+          backgroundImage: 'url(/OutBg2.png)',
           height: '100vh',
           width: '100vw'
         }}
