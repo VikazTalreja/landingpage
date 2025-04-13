@@ -85,9 +85,9 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
+        backdropFilter: visible ? "blur(12px)" : "none",
         boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
+          ? "0 4px 30px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(34, 42, 53, 0.06), 0 0 4px rgba(34, 42, 53, 0.1)"
           : "none",
         width: visible ? "60%" : "100%",
         y: visible ? 8 : 0,
@@ -98,11 +98,11 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 30,
       }}
       style={{
-        minWidth: visible ? "600px" : "800px",
+        minWidth: visible ? "600px" : "700px",
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-[1350px] flex-row items-center justify-between self-start rounded-full  bg-bg-[#2d1a5b] px-2 py-1 lg:flex dark:bg-bg-[#2d1a5b]",
-        visible && "bg-[#2d1a5b]",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-bg-[#2d1a5b] px-3 py-2 lg:flex dark:bg-bg-[#2d1a5b]",
+        visible && "bg-[#2d1a5b] shadow-xl shadow-black/20",
         className,
       )}
     >
@@ -115,14 +115,14 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   return (
     <div
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x- font-normal  mr-7 text-lg text-white transition duration-200 lg:flex",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-1 font-medium mr-7 text-base text-white transition duration-200 lg:flex",
         className,
       )}
     >
       {items.map((item, idx) => (
         <Link
           onClick={onItemClick}
-          className="relative px-4 py-2 text-white hover:text-gray-200 transition-colors"
+          className="relative px-5 py-2.5 text-white hover:text-gray-200 transition-colors"
           key={`link-${idx}`}
           href={item.link}
         >
@@ -137,13 +137,13 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
+        backdropFilter: visible ? "blur(12px)" : "none",
         boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
+          ? "0 4px 30px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(34, 42, 53, 0.06), 0 0 4px rgba(34, 42, 53, 0.1)"
           : "none",
         width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "16px",
-        paddingLeft: visible ? "12px" : "16px",
+        paddingRight: visible ? "16px" : "20px",
+        paddingLeft: visible ? "16px" : "20px",
         borderRadius: visible ? "16px" : "2rem",
         y: visible ? 8 : 0,
       }}
@@ -153,8 +153,8 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 30,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-[#2d1a5b]",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-4 py-4 lg:hidden",
+        visible && "bg-[#2d1a5b] shadow-lg shadow-black/20",
         className,
       )}
     >
@@ -170,7 +170,7 @@ export const MobileNavHeader = ({
   return (
     <div
       className={cn(
-        "flex w-full flex-row items-center justify-between",
+        "flex w-full flex-row items-center justify-between py-1",
         className,
       )}
     >
@@ -192,7 +192,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-           "absolute inset-x-0 top-16 z-50 text-black flex w-full flex-col items-start justify-start gap-4 rounded-lg  px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
+           "absolute inset-x-0 top-16 z-50 text-black flex w-full flex-col items-start justify-start gap-5 rounded-lg px-6 py-8 shadow-[0_4px_30px_rgba(0,0,0,0.15),_0_1px_1px_rgba(0,0,0,0.08),_0_0_0_1px_rgba(34,42,53,0.06),_0_0_4px_rgba(34,42,53,0.1)] dark:bg-neutral-950 bg-white",
             className,
           )}
         >
@@ -211,11 +211,11 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
+    <IconX className="text-black dark:text-white w-7 h-7" onClick={onClick} />
   ) : (
     <svg
       onClick={onClick}
-      className="w-6 h-6 text-white dark:text-white"
+      className="w-7 h-7 text-white dark:text-white"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -231,7 +231,7 @@ export const NavbarLogo = () => {
   return (
     <Link
       href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-lg font-semibold text-white"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-3 py-1.5 text-lg font-semibold text-white"
     >
       {/* <Image
         src="/globe.svg"
@@ -239,7 +239,7 @@ export const NavbarLogo = () => {
         width={36}
         height={36}
       /> */}
-      <span className="font-black text-white text-2xl md:text-4xl">Meresu</span>
+      <span className="font-semibold text-white text-2xl md:text-3xl">Meresu</span>
     </Link>
   );
 };
@@ -264,20 +264,20 @@ export const NavbarButton = ({
   const getVariant = (variant: string) => {
     switch (variant) {
       case "primary":
-        return "bg-black  text-white border-transparent";
+        return "bg-black text-white border-transparent shadow-md hover:shadow-lg";
       case "secondary":
-        return "bg-white  text-black border-gray-300";
+        return "bg-white text-black border-gray-300 shadow-md hover:shadow-lg";
       case "dark":
-        return "bg-neutral-800 text-white border-transparent";
+        return "bg-neutral-800 text-white border-transparent shadow-md hover:shadow-lg";
       case "gradient":
-        return "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-transparent";
+        return "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-transparent shadow-md hover:shadow-lg";
       default:
-        return "bg-black  text-white border-transparent";
+        return "bg-black text-white border-transparent shadow-md hover:shadow-lg";
     }
   };
 
   const baseClasses =
-    "relative inline-flex h-12 items-center justify-center rounded-full border px-6 py-3 text-base font-semibold transition-all focus:outline-none";
+    "relative inline-flex h-11 items-center justify-center rounded-full border px-6 py-2 text-base font-semibold transition-all focus:outline-none";
 
   if (typeof children !== "undefined") {
     return (

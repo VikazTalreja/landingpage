@@ -321,11 +321,11 @@ const TabSection = () => {
             }
             
             .animate-marquee {
-              animation: marquee 90s linear infinite;
+              animation: marquee 150s linear infinite;
             }
             
             .animate-marquee-reverse {
-              animation: marquee 90s linear infinite reverse;
+              animation: marquee 150s linear infinite reverse;
             }
             
             @keyframes fadeIn {
