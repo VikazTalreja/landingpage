@@ -115,13 +115,12 @@ export default function Home() {
         </h1>
         
         <p className="mt-6 max-w-2xl text-xl">
-          Entvin AI is an intelligent agent platform which streamline FDA compliance for 
-          regulatory, medical affairs and commercial teams.
+        Meresu AI is an intelligent voice agent platform that streamlines soft skills assessment for hiring, talent development, and HR teams.
         </p>
         
         <div className="mt-12">
           <ParticleButton>
-            Get Started
+          Talk to our AI Agent
           </ParticleButton>
         </div>
         

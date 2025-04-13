@@ -35,11 +35,10 @@ const AudioSection = () => {
       <div className="relative z-10 py-20 px-4 max-w-6xl mx-auto">
         <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-xl">
           <div className="max-w-3xl">
-            <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-bold text-black mb-5">Listen to Julian</h2>
+            <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-bold text-black mb-5">Listen to Mahira</h2>
             
             <p className="text-lg sm:text-xl text-gray-600 mb-8 sm:mb-10 md:mb-12 leading-relaxed">
-              Julian delivers delightful and personalized conversations. Always available, 
-              endlessly patient, and able to reason, predict, and act in real-time.
+           Smooth. Smart. Human-like. Listen to Mahira’s tone in action.
             </p>
             
             <div className="bg-[#f8f3ec] rounded-xl p-4 sm:p-5 md:p-6 mb-8 sm:mb-10 relative overflow-hidden">
@@ -108,7 +107,7 @@ const AudioSection = () => {
             </div>
             
             <button onClick={() => setIsModalOpen(true)} className="inline-block bg-black text-white px-6 py-2 sm:px-7 sm:py-2.5 md:px-8 md:py-3 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base">
-            Talk to our AI Agent
+           Get started
             </button>
           </div>
         </div>

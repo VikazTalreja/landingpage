@@ -101,7 +101,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: visible ? "600px" : "800px",
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-[1350px] flex-row items-center justify-between self-start rounded-full  bg-bg-[#2d1a5b] px-8 py-2 lg:flex dark:bg-bg-[#2d1a5b]",
+        "relative z-[60] mx-auto hidden w-full max-w-[1350px] flex-row items-center justify-between self-start rounded-full  bg-bg-[#2d1a5b] px-2 py-1 lg:flex dark:bg-bg-[#2d1a5b]",
         visible && "bg-[#2d1a5b]",
         className,
       )}
@@ -115,7 +115,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   return (
     <div
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x- font-semibold  mx-7 text-lg text-white transition duration-200 lg:flex",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x- font-normal  mr-7 text-lg text-white transition duration-200 lg:flex",
         className,
       )}
     >
@@ -231,7 +231,7 @@ export const NavbarLogo = () => {
   return (
     <Link
       href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-xl font-semibold text-white"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-lg font-semibold text-white"
     >
       {/* <Image
         src="/globe.svg"
@@ -268,7 +268,7 @@ export const NavbarButton = ({
       case "secondary":
         return "bg-white  text-black border-gray-300";
       case "dark":
-        return "bg-neutral-800  text-white border-transparent";
+        return "bg-neutral-800 text-white border-transparent";
       case "gradient":
         return "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-transparent";
       default:
