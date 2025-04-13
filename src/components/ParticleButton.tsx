@@ -9,6 +9,7 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
+import { FormModal } from './form';
 
 
 interface Particle {
@@ -60,7 +61,7 @@ const rotateGradientStyles = `
     }
   }
   .rotate-gradient {
-    animation: spin 4s linear infinite;
+    animation: spin 8s linear infinite;
     animation-timing-function: linear;
   }
 
@@ -180,6 +181,7 @@ export const ParticleButton = ({
     phoneNumber: '',
     companyName: ''
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -191,18 +193,20 @@ export const ParticleButton = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (currentStep < questions.length - 1) {
-      setCurrentStep(prev => prev + 1);
-    } else {
-      console.log('Form submitted:', formData);
+    console.log('Form submitted:', formData);
+    setIsSubmitted(true);
+    
+    // Close modal after showing success message for 3 seconds
+    setTimeout(() => {
       setIsModalOpen(false);
+      setIsSubmitted(false);
       setCurrentStep(0);
       setFormData({
         name: '',
         phoneNumber: '',
         companyName: ''
       });
-    }
+    }, 3000);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -263,7 +267,7 @@ export const ParticleButton = ({
         radius: 0, // Start from center
         color: 'rgb(255, 255, 255)',
         size: 3,
-        speed: 0.01, // Base rotation speed
+        speed: 0.005, // Reduced rotation speed (was 0.01)
         opacity: 1, // Start fully visible
         life: 1, // Life percentage (1 = new, 0 = dead)
       };
@@ -277,9 +281,9 @@ export const ParticleButton = ({
       
       for (const p of particlesRef.current) {
         // Update particle
-        p.radius += 0.5; // Move outward slower
-        p.angle += 0.01; // Rotate
-        p.life -= 0.004; // Decrease life more slowly
+        p.radius += 0.3; // Move outward slower (was 0.5)
+        p.angle += 0.005; // Rotate slower (was 0.01)
+        p.life -= 0.002; // Decrease life more slowly (was 0.004)
         p.opacity = p.life; // Fade out based on life
 
         // Calculate new position
@@ -294,8 +298,8 @@ export const ParticleButton = ({
       }
 
       // Emit new particles periodically
-      if (timestamp - lastEmitTimeRef.current > 100) { // Emit every 100ms
-        if (particlesRef.current.length < 20) { // Keep max 10 particles
+      if (timestamp - lastEmitTimeRef.current > 150) { // Emit less frequently (was 100ms)
+        if (particlesRef.current.length < 20) { // Keep max 20 particles
           particlesRef.current.push(createParticle());
         }
         lastEmitTimeRef.current = timestamp;
@@ -395,71 +399,99 @@ export const ParticleButton = ({
         </button>
 
         {/* Typeform-like Modal */}
-        {isModalOpen && (
-  <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-    <div className="shadow-input mx-auto w-full max-w-md rounded-lg bg-white p-6 dark:bg-black relative">
-      <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">
-        Talk to our AI HR Agent Anita
-      </h2>
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <LabelInputContainer className="mb-2">
-          <Label htmlFor="name" className="text-sm font-medium text-left">
-            Full Name
-          </Label>
-          <Input 
-            id="name" 
-            placeholder="Tyler Durden" 
-            type="text" 
-            className="mt-1"
-          />
-        </LabelInputContainer>
+        {/* {isModalOpen && (
+          <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="shadow-input mx-auto w-full max-w-md rounded-lg bg-white p-6 dark:bg-black relative">
+              
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 cursor-pointer text-gray-500 hover:text-gray-700 transition-colors"
+                aria-label="Close modal"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              
+              {!isSubmitted ? (
+                <>
+                  <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">
+                    Talk to our AI HR Agent Anita
+                  </h2>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
+                    <LabelInputContainer className="mb-2">
+                      <Label htmlFor="name" className="text-sm font-medium text-left">
+                        Full Name
+                      </Label>
+                      <Input 
+                        id="name" 
+                        placeholder="Tyler Durden" 
+                        type="text" 
+                        className="mt-1"
+                      />
+                    </LabelInputContainer>
 
-        <LabelInputContainer className="mb-2">
-          <Label htmlFor="email" className="text-sm font-medium text-left">
-            Email Address
-          </Label>
-          <Input
-            id="email"
-            placeholder="projectmayhem@fc.com"
-            type="email"
-            className="mt-1"
-          />
-        </LabelInputContainer>
+                    <LabelInputContainer className="mb-2">
+                      <Label htmlFor="email" className="text-sm font-medium text-left">
+                        Email Address
+                      </Label>
+                      <Input
+                        id="email"
+                        placeholder="projectmayhem@fc.com"
+                        type="email"
+                        className="mt-1"
+                      />
+                    </LabelInputContainer>
 
-        <LabelInputContainer className="mb-2">
-          <Label htmlFor="phone" className="text-sm font-medium text-left">
-            Phone Number
-          </Label>
-          <Input
-            id="phone"
-            placeholder="+1 234 567 890"
-            type="tel"
-            className="mt-1"
-          />
-        </LabelInputContainer>
+                    <LabelInputContainer className="mb-2">
+                      <Label htmlFor="phone" className="text-sm font-medium text-left">
+                        Phone Number
+                      </Label>
+                      <Input
+                        id="phone"
+                        placeholder="+1 234 567 890"
+                        type="tel"
+                        className="mt-1"
+                      />
+                    </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="company" className="text-sm font-medium text-left">
-            Company Name
-          </Label>
-          <Input
-            id="company"
-            placeholder="Fight Club"
-            type="text"
-            className="mt-1"
-          />
-        </LabelInputContainer>
+                    <LabelInputContainer className="mb-4">
+                      <Label htmlFor="company" className="text-sm font-medium text-left">
+                        Company Name
+                      </Label>
+                      <Input
+                        id="company"
+                        placeholder="Fight Club"
+                        type="text"
+                        className="mt-1"
+                      />
+                    </LabelInputContainer>
 
-        <button
-          className="w-full bg-black text-white font-medium py-2 px-4 rounded-md transition-colors"
-          type="submit"
-        >
-          Continue &rarr;
-        </button>
-      </form>
-    </div>
-  </div>
-)}
+                    <button
+                      className="w-full bg-black text-white dark:bg-white dark:text-black font-medium py-2 px-4 rounded-md transition-colors"
+                      type="submit"
+                    >
+                      Continue &rarr;
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center py-10 ">
+                 
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Thank You!</h3>
+                  <p className="text-gray-700">You will receive a call from Mahira shortly.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )} */}
+         <FormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Request a Consultation" 
+        successMessage="Our team will contact you shortly!"
+      />
       </div>
     </>
   );

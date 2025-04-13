@@ -24,9 +24,11 @@ import { SignupFormDemo } from "@/components/formExample";
 import AudioSection from "@/components/AudioSection";
 import TabSection from "@/components/TabSection";
 import WorkforceSection from "@/components/WorkforceSection";
+import { FormModal } from "@/components/form";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const navItems = [
     {
@@ -53,6 +55,12 @@ export default function Home() {
       <div className="absolute inset-0 z-0">
         <Hero />
       </div>
+      <FormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Request a Consultation" 
+        successMessage="Our team will contact you shortly!"
+      />
       
       {/* Navigation is positioned on top */}
       <div className="relative">
@@ -60,8 +68,8 @@ export default function Home() {
           <NavBody>
             <NavbarLogo />
             <NavItems items={navItems} />
-            <div className="relative z-50 flex gap-2">
-              <NavbarButton variant="secondary">Schedule Demo</NavbarButton>
+            <div className="relative z-50 flex">
+              <NavbarButton variant="secondary" className="cursor-pointer" onClick={() => setIsModalOpen(true)}>Schedule Demo</NavbarButton>
             </div>
           </NavBody>
           
@@ -73,7 +81,7 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
               />
             </MobileNavHeader>
-            
+           
             <MobileNavMenu 
               isOpen={mobileMenuOpen} 
               onClose={() => setMobileMenuOpen(false)}
@@ -118,9 +126,7 @@ export default function Home() {
         </div>
         
         <p className="mt-16 text-lg">
-          Trusted by regulatory and pharma professionals
-          <br />
-          from world's leading organisations
+        Trusted by HR leaders and talent teams across progressive enterprises
         </p>
       </div>
 
@@ -129,13 +135,7 @@ export default function Home() {
         <CallAnimationPage />
       </div>
 
-      {/* Sticky Scroll Section */}
-      <div className="relative z-30 w-full hidden md:block">
-        <StickyScrollRevealDemo />
-      </div>
-      <div className="relative z-30 w-full md:hidden block">
-        <Mobilescroll />
-      </div>
+    
 
       {/* Workforce Section */}
       <div className="relative z-30 w-full">

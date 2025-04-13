@@ -1,10 +1,13 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
+import { FormModal } from './form';
 
 const AudioSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isClient, setIsClient] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   useEffect(() => {
     setIsClient(true);
@@ -30,16 +33,16 @@ const AudioSection = () => {
       <div className="absolute inset-0 bg-[url('/sand-texture.jpg')] bg-cover opacity-70 z-0"></div>
       
       <div className="relative z-10 py-20 px-4 max-w-6xl mx-auto">
-        <div className="bg-white rounded-[2rem] p-12 shadow-xl">
+        <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-xl">
           <div className="max-w-3xl">
-            <h2 className="text-[3.5rem] font-bold text-black mb-5">Listen to Julian</h2>
+            <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-bold text-black mb-5">Listen to Julian</h2>
             
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 sm:mb-10 md:mb-12 leading-relaxed">
               Julian delivers delightful and personalized conversations. Always available, 
               endlessly patient, and able to reason, predict, and act in real-time.
             </p>
             
-            <div className="bg-[#f8f3ec] rounded-xl p-6 mb-10 relative">
+            <div className="bg-[#f8f3ec] rounded-xl p-4 sm:p-5 md:p-6 mb-8 sm:mb-10 relative overflow-hidden">
               {isClient && (
                 <audio 
                   ref={audioRef} 
@@ -50,20 +53,20 @@ const AudioSection = () => {
               )}
               
               {/* Waveform visualization */}
-              <div className="flex items-center h-16 gap-[1px]">
-                {isClient && Array.from({ length: 100 }, (_, i) => {
+              <div className="flex items-center h-16 sm:h-20 md:h-24 gap-[2px] sm:gap-[3px]">
+                {isClient && Array.from({ length: 50 }, (_, i) => {
                   // Create a pattern that follows the image's waveform pattern
-                  const position = i / 100;
+                  const position = i / 60;
                   
-                  // More realistic waveform pattern with multiple frequencies
-                  const frequency1 = Math.sin(position * Math.PI * 20) * 0.3;
-                  const frequency2 = Math.sin(position * Math.PI * 10) * 0.15;
-                  const frequency3 = Math.sin(position * Math.PI * 5) * 0.1;
+                  // More pronounced waveform pattern with higher amplitudes
+                  const frequency1 = Math.sin(position * Math.PI * 12) * 0.5;
+                  const frequency2 = Math.sin(position * Math.PI * 6) * 0.25;
+                  const frequency3 = Math.sin(position * Math.PI * 3) * 0.2;
                   
                   // Combine frequencies with position-based dampening
                   const centerPos = Math.abs(position - 0.5) * 2; // 0 at center, 1 at edges
-                  const positionDamp = Math.max(0, 1 - centerPos * 1.2);
-                  const height = Math.max(0.15, (frequency1 + frequency2 + frequency3 + 0.5) * positionDamp);
+                  const positionDamp = Math.max(0, 1 - centerPos * 0.85);
+                  const height = Math.max(0.1, (frequency1 + frequency2 + frequency3 + 0.6) * positionDamp);
                   
                   return (
                     <div 
@@ -72,7 +75,8 @@ const AudioSection = () => {
                       style={{ 
                         height: `${height * 100}%`,
                         maxHeight: '100%',
-                        minHeight: '15%'
+                        minHeight: '8%',
+                        minWidth: '4px'
                       }}
                     />
                   );
@@ -82,7 +86,7 @@ const AudioSection = () => {
                 <button
                   onClick={togglePlay}
                   className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                  w-16 h-16 bg-[#a98c64] rounded-full flex items-center justify-center 
+                  w-14 h-14 sm:w-16 sm:h-16 md:w-16 md:h-16 bg-[#a98c64] rounded-full flex items-center justify-center 
                   hover:bg-[#8a7351] transition-colors shadow-lg z-10"
                   aria-label={isPlaying ? "Pause" : "Play"}
                 >
@@ -90,7 +94,7 @@ const AudioSection = () => {
                     xmlns="http://www.w3.org/2000/svg" 
                     viewBox="0 0 24 24" 
                     fill="white" 
-                    className="w-7 h-7"
+                    className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7"
                     style={{ marginLeft: isPlaying ? 0 : '2px' }}
                   >
                     {isPlaying ? (
@@ -103,12 +107,18 @@ const AudioSection = () => {
               </div>
             </div>
             
-            <a href="/get-started" className="inline-block bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors">
-              Get started
-            </a>
+            <button onClick={() => setIsModalOpen(true)} className="inline-block bg-black text-white px-6 py-2 sm:px-7 sm:py-2.5 md:px-8 md:py-3 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base">
+            Talk to our AI Agent
+            </button>
           </div>
         </div>
       </div>
+      <FormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Talk to our AI Agent" 
+        successMessage="We'll get back to you within 24 hours"
+      />
     </section>
   );
 };

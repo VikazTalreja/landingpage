@@ -101,7 +101,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: visible ? "600px" : "800px",
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full  bg-transparent px-8 py-4 lg:flex dark:bg-transparent",
+        "relative z-[60] mx-auto hidden w-full max-w-[1350px] flex-row items-center justify-between self-start rounded-full  bg-bg-[#2d1a5b] px-8 py-4 lg:flex dark:bg-bg-[#2d1a5b]",
         visible && "bg-[#2d1a5b]",
         className,
       )}
@@ -112,34 +112,24 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
 };
 
 export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
-  const [hovered, setHovered] = useState<number | null>(null);
-
   return (
-    <motion.div
-      onMouseLeave={() => setHovered(null)}
+    <div
       className={cn(
-        "absolute inset-0 hidden  flex-1 flex-row items-center justify-center space-x-6 mx-7 text-lg text-white font-light  transition duration-200 hover:text-zinc-800 lg:flex",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x- font-bold mx-7 text-lg text-white transition duration-200 lg:flex",
         className,
       )}
     >
       {items.map((item, idx) => (
         <Link
-          onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-white"
+          className="relative px-4 py-2 text-white hover:text-gray-200 transition-colors"
           key={`link-${idx}`}
           href={item.link}
         >
-          {hovered === idx && (
-            <motion.div
-              layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
-            />
-          )}
           <span className="relative z-20">{item.name}</span>
         </Link>
       ))}
-    </motion.div>
+    </div>
   );
 };
 
@@ -249,7 +239,7 @@ export const NavbarLogo = () => {
         width={36}
         height={36}
       /> */}
-      <span className="font-medium text-white text-2xl">Meresu</span>
+      <span className="font-black text-white text-2xl md:text-4xl">Meresu</span>
     </Link>
   );
 };
@@ -274,15 +264,15 @@ export const NavbarButton = ({
   const getVariant = (variant: string) => {
     switch (variant) {
       case "primary":
-        return "bg-black hover:bg-gray-800 text-white border-transparent";
+        return "bg-black  text-white border-transparent";
       case "secondary":
-        return "bg-white hover:bg-gray-100 text-black border-gray-300";
+        return "bg-white  text-black border-gray-300";
       case "dark":
-        return "bg-neutral-800 hover:bg-neutral-900 text-white border-transparent";
+        return "bg-neutral-800  text-white border-transparent";
       case "gradient":
-        return "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white border-transparent";
+        return "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-transparent";
       default:
-        return "bg-black hover:bg-gray-800 text-white border-transparent";
+        return "bg-black  text-white border-transparent";
     }
   };
 

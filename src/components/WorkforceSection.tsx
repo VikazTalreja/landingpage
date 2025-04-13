@@ -15,6 +15,23 @@ type CarouselItem = {
 const WorkforceSection = () => {
   const [activeSlide, setActiveSlide] = useState(2); // Start with the middle slide
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if screen is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Add event listener for resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   const carouselItems: CarouselItem[] = [
     {
@@ -35,18 +52,6 @@ const WorkforceSection = () => {
       description: "Build a lasting and contextual memory, transforming past insights into future performance.",
       type: 'image',
       src: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/673d9a61ee1f793446f25070_Workers%20are%20self-learning.webp"
-    },
-    {
-      id: 2,
-      title: "Deeply integrated",
-      description: "Orchestrate seamless interactions across your entire tech ecosystem",
-      type: 'video',
-      src: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d392625c0e86d7a5f944ee_deeply-integrated-crop-transcode.mp4",
-      posterUrl: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d392625c0e86d7a5f944ee_deeply-integrated-crop-poster-00001.jpg",
-      videoUrls: [
-        "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d392625c0e86d7a5f944ee_deeply-integrated-crop-transcode.mp4",
-        "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d392625c0e86d7a5f944ee_deeply-integrated-crop-transcode.webm"
-      ]
     },
     {
       id: 3,
@@ -154,20 +159,27 @@ const WorkforceSection = () => {
 
               {/* Carousel Section */}
               <div className="workforce-carousel_group relative">
-                <div className="relative overflow-hidden py-8 px-4 h-[500px]">
+                <div className="relative overflow-hidden py-8 px-4 h-[400px] md:h-[500px]">
                   <div className="relative w-full h-full mx-auto">
                     {carouselItems.map((item, index) => {
                       const distance = getDistanceFromActive(index);
                       const isActive = index === activeSlide;
                       const position = index - activeSlide;
                       
+                      // Only show items that are active or adjacent on mobile
+                      if (isMobile && Math.abs(position) > 0) {
+                        return null;
+                      }
+                      
                       return (
                         <div
                           key={item.id}
-                          className={`absolute top-1/2 left-1/2 transition-all duration-500 ease-in-out w-[40%] ${isActive ? 'z-30' : `z-${20 - distance}`}`}
+                          className={`absolute top-1/2 left-1/2 transition-all duration-500 ease-in-out ${
+                            isMobile ? 'w-[85%]' : 'w-[40%]'
+                          } ${isActive ? 'z-30' : `z-${20 - distance}`}`}
                           style={{
                             opacity: isActive ? 1 : Math.max(0.3, 0.9 - (distance * 0.25)),
-                            transform: `translate(-50%, -50%) translateX(${position * 65}%) ${isActive ? 'scale(1)' : 'scale(0.85)'}`,
+                            transform: `translate(-50%, -50%) ${!isMobile ? `translateX(${position * 65}%)` : ''} ${isActive ? 'scale(1)' : 'scale(0.85)'}`,
                           }}
                           onClick={() => !isActive && handleNavClick(index)}
                         >
@@ -184,10 +196,12 @@ const WorkforceSection = () => {
                                 />
                               )}
                             </div>
-                            <div className={`mt-4 text-center justify-start  transition-opacity duration-300`}>
-                              <h3 className="text-lg font-semibold text-gray-900 text-left mb-1">{item.title}</h3>
-                              <p className="text-sm text-gray-600 text-left">{item.description}</p>
-                            </div>
+                            {isActive && (
+                              <div className="mt-4 justify-start transition-all duration-500">
+                                <h3 className="text-lg md:text-2xl font-bold text-black text-left mb-1">{item.title}</h3>
+                                <p className="text-sm md:text-base text-gray-700 text-left">{item.description}</p>
+                              </div>
+                            )}
                           </div>
                         </div>
                       );
@@ -212,26 +226,35 @@ const WorkforceSection = () => {
                   ))}
                 </div>
                 
-                {/* Navigation Arrows */}
-                <button 
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg z-40 transition-all duration-300"
-                  onClick={() => handleNavClick(activeSlide > 0 ? activeSlide - 1 : carouselItems.length - 1)}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M15 18l-6-6 6-6" />
-                  </svg>
-                </button>
-                <button 
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg z-40 transition-all duration-300"
-                  onClick={() => handleNavClick(activeSlide < carouselItems.length - 1 ? activeSlide + 1 : 0)}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </button>
+                {/* Navigation Arrows - Hidden on Mobile */}
+                {!isMobile && (
+                  <>
+                    <button 
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg z-40 transition-all duration-300"
+                      onClick={() => handleNavClick(activeSlide > 0 ? activeSlide - 1 : carouselItems.length - 1)}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
+                      </svg>
+                    </button>
+                    <button 
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg z-40 transition-all duration-300"
+                      onClick={() => handleNavClick(activeSlide < carouselItems.length - 1 ? activeSlide + 1 : 0)}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
+                  </>
+                )}
               </div>
               
-              {/* Item titles under carousel (visible only on desktop) */}
+              {/* Mobile Swipe Indicator - only visible on mobile */}
+              {isMobile && (
+                <div className="flex justify-center mt-4 text-xs text-gray-500">
+                  <p>Swipe or tap dots to navigate</p>
+                </div>
+              )}
               
             </div>
           </div>

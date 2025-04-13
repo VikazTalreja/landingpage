@@ -16,29 +16,29 @@ const TabSection = () => {
   const tabs: TabData[] = [
     {
       id: "Tab 1",
-      title: "Identify",
-      description: "Identify perfect-fit prospects at scale, filtering millions of signals to surface your ideal opportunities across every channel.",
+      title: "Assess",
+      description: "Mahira speaks directly with candidates and employees—engaging in real-time, free-flowing conversations that go beyond surface-level interviews.",
       imageSrc: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01.webp",
       imageSrcSet: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-500.webp 500w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-800.webp 800w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-1080.webp 1080w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-1600.webp 1600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-2000.webp 2000w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-2600.webp 2600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01-p-3200.webp 3200w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d378d5680227d8450cfb55_tab-01.webp 3360w"
     },
     {
       id: "Tab 2",
-      title: "Research",
-      description: "Research prospect signals across social, public, and engagement data to craft winning strategies.",
+      title: "Analyze",
+      description: "Backed by behavioral psychology, Mahira processes tone, language, and sentiment to generate actionable soft skill insights and fit scores",
       imageSrc: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02.webp",
       imageSrcSet: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-500.webp 500w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-800.webp 800w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-1080.webp 1080w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-1600.webp 1600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-2000.webp 2000w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-2600.webp 2600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02-p-3200.webp 3200w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d964015aef4a098f69955b_tab-02.webp 3360w"
     },
     {
       id: "Tab 3",
       title: "Personalize",
-      description: "Calibrate conversations with precision, dynamically adapting tone and messaging to match each prospect's unique style.",
+      description: "Every interaction is tailored—Mahira dynamically adjusts her conversation flow to make people feel heard, understood, and open.",
       imageSrc: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03.webp",
       imageSrcSet: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-500.webp 500w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-800.webp 800w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-1080.webp 1080w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-1600.webp 1600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-2000.webp 2000w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-2600.webp 2600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03-p-3200.webp 3200w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9657f56d92c02498e9bef_tab-03.webp 3360w"
     },
     {
       id: "Tab 4",
-      title: "Engage",
-      description: "Convert opportunities through multi-channel engagement, executing follow-through from interaction to outcomes.",
+      title: "Deliver",
+      description: "Results arrive in clean, structured reports—highlighting traits, risks, growth areas, and role fit, ready for your team to review and act on.",
       imageSrc: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04.webp",
       imageSrcSet: "https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-500.webp 500w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-800.webp 800w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-1080.webp 1080w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-1600.webp 1600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-2000.webp 2000w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-2600.webp 2600w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04-p-3200.webp 3200w, https://cdn.prod.website-files.com/66fe5a1a88c73ef8f270d312/67d9696547049593d7d2d6ac_tab-04.webp 3360w"
     }
@@ -71,7 +71,7 @@ const TabSection = () => {
               {tabs.map((tab) => (
                 <div 
                   key={tab.id}
-                  className={`product_tab-pane absolute inset-0 transition-opacity duration-300 ease-in-out ${activeTab === tab.id ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                  className={`product_tab-pane absolute inset-0  transition-opacity duration-300 ease-in-out ${activeTab === tab.id ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                   style={{
                     transform: activeTab === tab.id ? 'translateY(0)' : 'translateY(20px)',
                     transition: 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out'
@@ -98,11 +98,11 @@ const TabSection = () => {
               {tabs.map((tab, index) => (
                 <div key={tab.id}>
                   <div 
-                    className={`cursor-pointer px-3 py-4 rounded-md transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${activeTab === tab.id ? 'bg-white shadow-md' : 'hover:bg-gray-100'}`}
+                    className={`cursor-pointer px-3 py-4 rounded-md transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${activeTab === tab.id ? 'border-t-2 border-amber-950 text-black ' : 'hover:bg-gray-100  md:text-amber-950/40'}`}
                     onClick={() => setActiveTab(tab.id)}
-                  >
+                  > 
                     <h4 className="text-lg font-semibold mb-2">{tab.title}</h4>
-                    <p className="text-sm text-gray-600 mb-3">{tab.description}</p>
+                    <p className="text-sm  mb-3">{tab.description}</p>
                     
                     {/* Mobile-only image */}
                     <div className="md:hidden mt-4">
