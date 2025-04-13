@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 type CarouselItem = {
@@ -16,6 +16,9 @@ const WorkforceSection = () => {
   const [activeSlide, setActiveSlide] = useState(2); // Start with the middle slide
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   // Check if screen is mobile
   useEffect(() => {
@@ -32,6 +35,36 @@ const WorkforceSection = () => {
     // Cleanup
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
+
+  // Handle swipe events
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50; // Minimum distance to consider a swipe
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Swipe left - go to next slide
+        handleNavClick(activeSlide < carouselItems.length - 1 ? activeSlide + 1 : 0);
+      } else {
+        // Swipe right - go to previous slide
+        handleNavClick(activeSlide > 0 ? activeSlide - 1 : carouselItems.length - 1);
+      }
+    }
+    
+    // Reset touch values
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
 
   const carouselItems: CarouselItem[] = [
     {
@@ -159,7 +192,13 @@ const WorkforceSection = () => {
 
               {/* Carousel Section */}
               <div className="workforce-carousel_group relative">
-                <div className="relative overflow-hidden py-8 px-4 h-[400px] md:h-[500px]">
+                <div 
+                  ref={carouselRef}
+                  className="relative overflow-hidden py-8 px-4 h-[400px] md:h-[500px]" 
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                >
                   <div className="relative w-full h-full mx-auto">
                     {carouselItems.map((item, index) => {
                       const distance = getDistanceFromActive(index);

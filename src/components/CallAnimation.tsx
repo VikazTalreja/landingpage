@@ -80,10 +80,10 @@ const CallAnimation = () => {
             
             {/* Content - Now on the right side */}
             <div className="flex flex-col justify-center md:w-1/2">
-              <h3 className="text-4xl text-black font-semibold mb-4">
+              <h3 className="text-  xl md:text-4xl text-black font-semibold mb-4">
                 Mahira <span className="text-gray-400">– Hiring Copilot</span>
               </h3>
-              <p className="text-gray-600 text-2xl mb-6">
+              <p className="text-gray-600 text-lg md:text-2xl mb-6">
                 Meet Mahira – your AI-powered soft skills expert who calls, converses, and uncovers potential—so your HR doesn't have to.
               </p>
               
