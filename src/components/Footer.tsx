@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="bg-[url('/OutBg.avif')] bg-cover bg-center text-white py-20">
+    <footer className="bg-[url('/OutBg2.png')] bg-cover bg-center text-white py-20">
    <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Section (Workers + Quicklinks) */}
