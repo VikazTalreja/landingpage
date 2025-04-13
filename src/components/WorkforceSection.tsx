@@ -13,12 +13,16 @@ type CarouselItem = {
 }
 
 const WorkforceSection = () => {
-  const [activeSlide, setActiveSlide] = useState(2); // Start with the middle slide
+  const [activeSlide, setActiveSlide] = useState(0); // Start with the first slide
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [direction, setDirection] = useState('forward');
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const videoEndedRef = useRef<boolean>(false);
+  const autoRotateTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Check if screen is mobile
   useEffect(() => {
@@ -36,8 +40,70 @@ const WorkforceSection = () => {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
+  // Handle auto rotation
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const startAutoRotation = () => {
+      // Clear any existing timers
+      if (autoRotateTimerRef.current) {
+        clearTimeout(autoRotateTimerRef.current);
+      }
+      
+      // Current item is an image, use fixed time (2 seconds)
+      if (carouselItems[activeSlide].type === 'image') {
+        console.log('Setting image timer for 2 seconds');
+        autoRotateTimerRef.current = setTimeout(() => {
+          console.log('Image timer expired, rotating');
+          rotateCarousel();
+        }, 2000);
+      }
+      // For videos, handleVideoEnded will trigger the rotation
+    };
+    
+    startAutoRotation();
+    
+    // Cleanup timer on unmount or when active slide changes
+    return () => {
+      if (autoRotateTimerRef.current) {
+        clearTimeout(autoRotateTimerRef.current);
+      }
+    };
+  }, [activeSlide, isAutoPlaying]);
+  
+  // Function to handle rotation direction
+  const rotateCarousel = () => {
+    if (!isAutoPlaying || isTransitioning) return;
+    
+    if (direction === 'forward') {
+      if (activeSlide === carouselItems.length - 1) {
+        // Reached the end, change direction
+        setDirection('backward');
+        handleNavClick(activeSlide - 1);
+      } else {
+        handleNavClick(activeSlide + 1);
+      }
+    } else {
+      if (activeSlide === 0) {
+        // Reached the beginning, change direction
+        setDirection('forward');
+        handleNavClick(activeSlide + 1);
+      } else {
+        handleNavClick(activeSlide - 1);
+      }
+    }
+  };
+
+  // Handle video ended event
+  const handleVideoEnded = () => {
+    videoEndedRef.current = true;
+    rotateCarousel();
+  };
+
   // Handle swipe events
   const handleTouchStart = (e: React.TouchEvent) => {
+    // Pause auto-rotation when user interacts
+    setIsAutoPlaying(false);
     touchStartX.current = e.touches[0].clientX;
   };
 
@@ -64,6 +130,11 @@ const WorkforceSection = () => {
     // Reset touch values
     touchStartX.current = null;
     touchEndX.current = null;
+    
+    // Resume auto-rotation after 5 seconds of inactivity
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 5000);
   };
 
   const carouselItems: CarouselItem[] = [
@@ -144,11 +215,12 @@ const WorkforceSection = () => {
         <video 
           ref={videoRef}
           autoPlay={isActive}
-          loop 
+          loop={false} 
           muted 
           playsInline
           className="w-full h-full object-cover"
           poster={item.posterUrl}
+          onEnded={handleVideoEnded}
         >
           {item.videoUrls.map((url, idx) => (
             <source key={idx} src={url} />
@@ -214,11 +286,11 @@ const WorkforceSection = () => {
                         <div
                           key={item.id}
                           className={`absolute top-1/2 left-1/2 transition-all duration-500 ease-in-out ${
-                            isMobile ? 'w-[85%]' : 'w-[40%]'
+                            isMobile ? 'w-[85%]' : 'w-[30%]'
                           } ${isActive ? 'z-30' : `z-${20 - distance}`}`}
                           style={{
-                            opacity: isActive ? 1 : Math.max(0.3, 0.9 - (distance * 0.25)),
-                            transform: `translate(-50%, -50%) ${!isMobile ? `translateX(${position * 65}%)` : ''} ${isActive ? 'scale(1)' : 'scale(0.85)'}`,
+                            opacity: isActive ? 1 : Math.max(0.3, 0.9 - (distance * 0.3)),
+                            transform: `translate(-50%, -50%) ${!isMobile ? `translateX(${position * 110}%)` : ''} ${isActive ? 'scale(1)' : 'scale(0.75)'}`,
                           }}
                           onClick={() => !isActive && handleNavClick(index)}
                         >
@@ -235,12 +307,14 @@ const WorkforceSection = () => {
                                 />
                               )}
                             </div>
-                            {isActive && (
-                              <div className="mt-4 justify-start transition-all duration-500">
-                                <h3 className="text-lg md:text-2xl font-bold text-black text-left mb-1">{item.title}</h3>
-                                <p className="text-sm md:text-base text-gray-700 text-left">{item.description}</p>
-                              </div>
-                            )}
+                            <div className="mt-4 justify-start transition-all duration-500">
+                              <h3 className={`text-lg md:text-xl font-medium mb-1 ${isActive ? 'text-black font-bold' : 'text-gray-500'}`}>
+                                {item.title}
+                              </h3>
+                              <p className={`text-sm md:text-base ${isActive ? 'text-gray-700' : 'text-gray-400'} line-clamp-2`}>
+                                {item.description}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       );
@@ -253,7 +327,12 @@ const WorkforceSection = () => {
                   {carouselItems.map((item, index) => (
                     <button
                       key={item.id}
-                      onClick={() => handleNavClick(index)}
+                      onClick={() => {
+                        handleNavClick(index);
+                        setIsAutoPlaying(false);
+                        // Resume auto-rotation after 5 seconds
+                        setTimeout(() => setIsAutoPlaying(true), 5000);
+                      }}
                       className={`w-3 h-3 rounded-full transition-all duration-300 ${
                         index === activeSlide
                           ? 'bg-black'
@@ -270,7 +349,12 @@ const WorkforceSection = () => {
                   <>
                     <button 
                       className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg z-40 transition-all duration-300"
-                      onClick={() => handleNavClick(activeSlide > 0 ? activeSlide - 1 : carouselItems.length - 1)}
+                      onClick={() => {
+                        handleNavClick(activeSlide > 0 ? activeSlide - 1 : carouselItems.length - 1);
+                        setIsAutoPlaying(false);
+                        // Resume auto-rotation after 5 seconds
+                        setTimeout(() => setIsAutoPlaying(true), 5000);
+                      }}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M15 18l-6-6 6-6" />
@@ -278,7 +362,12 @@ const WorkforceSection = () => {
                     </button>
                     <button 
                       className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg z-40 transition-all duration-300"
-                      onClick={() => handleNavClick(activeSlide < carouselItems.length - 1 ? activeSlide + 1 : 0)}
+                      onClick={() => {
+                        handleNavClick(activeSlide < carouselItems.length - 1 ? activeSlide + 1 : 0);
+                        setIsAutoPlaying(false);
+                        // Resume auto-rotation after 5 seconds
+                        setTimeout(() => setIsAutoPlaying(true), 5000);
+                      }}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M9 18l6-6-6-6" />
@@ -294,7 +383,6 @@ const WorkforceSection = () => {
                   <p>Swipe or tap dots to navigate</p>
                 </div>
               )}
-              
             </div>
           </div>
         </div>

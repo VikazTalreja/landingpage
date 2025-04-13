@@ -151,11 +151,10 @@ export default function Home() {
       <div className="relative z-30 w-full">
         <AudioSection />
       </div>
-      
-      <div className="relative z-30 bg-purple-600 w-full">
-        {/* Footer */}
-        <Footer />
-      </div>
+      <div className="relative z-40 w-full bg-cover bg-center bg-no-repeat bg-[url('/OutBg.avif')]">
+  <Footer />
+</div>
+
     </main>
   );
 }
