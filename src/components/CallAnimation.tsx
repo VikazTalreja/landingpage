@@ -10,7 +10,7 @@ const CallAnimation = () => {
       <div className="max-w-[1200px] mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold text-black mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold text-black mb-6">
           Meet Mahira
           </h2>
           <p className="text-gray-600 max-w-[600px] mx-auto text-base mb-8">
@@ -18,7 +18,7 @@ const CallAnimation = () => {
             operations, multilingual capabilities, and human-like intelligence, they're revolutionizing 
             how work gets done.
           </p>
-          <button onClick={() => setIsModalOpen(true)} className="bg-black text-xl text-white  font-medium px-10 py-4 rounded-full">
+          <button onClick={() => setIsModalOpen(true)} className="bg-black text-base md:text-xl text-white  font-medium px-5 md:px-10 py-3 md:py-4 rounded-full">
             Get Started
           </button>
           <FormModal
