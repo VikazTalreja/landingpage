@@ -73,7 +73,7 @@ export default function Home() {
             </div>
           </NavBody>
           
-          <MobileNav>
+          {/* <MobileNav>
             <MobileNavHeader>
               <NavbarLogo />
               <MobileNavToggle 
@@ -102,7 +102,7 @@ export default function Home() {
                 </NavbarButton>
               </div>
             </MobileNavMenu>
-          </MobileNav>
+          </MobileNav> */}
         </Navbar>
       </div>
       

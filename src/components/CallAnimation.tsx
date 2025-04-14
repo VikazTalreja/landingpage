@@ -63,7 +63,7 @@ const CallAnimation = () => {
         /> */}
         <div className="ml-4">
           <h5 className="text-gray-400 text-lg font-semibold">Incoming</h5>
-          <h5 className="text-white text-xl font-bold">Mahira the Phone Agent</h5>
+          <h5 className="text-white text-xl font-bold">Mahira the AI HR Agent</h5>
        </div>
         <div className="ml-auto flex space-x-4">
           <button className="bg-red-600 rounded-full p-2 flex items-center justify-center">
@@ -80,7 +80,7 @@ const CallAnimation = () => {
             
             {/* Content - Now on the right side */}
             <div className="flex flex-col justify-center md:w-1/2">
-              <h3 className="text-  xl md:text-4xl text-black font-semibold mb-4">
+              <h3 className="text-xl md:text-4xl text-black font-semibold mb-4">
                 Mahira <span className="text-gray-400">– Hiring Copilot</span>
               </h3>
               <p className="text-gray-600 text-lg md:text-2xl mb-6">

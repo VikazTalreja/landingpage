@@ -266,7 +266,7 @@ export const ParticleButton = ({
         angle,
         radius: 0, // Start from center
         color: 'rgb(255, 255, 255)',
-        size: 3,
+        size: Math.random() * 2 + 2, // Varied star sizes between 2-4
         speed: 0.005, // Reduced rotation speed (was 0.01)
         opacity: 1, // Start fully visible
         life: 1, // Life percentage (1 = new, 0 = dead)
@@ -290,11 +290,34 @@ export const ParticleButton = ({
         p.x = centerXRef.current + Math.cos(p.angle) * p.radius;
         p.y = centerYRef.current + Math.sin(p.angle) * p.radius;
 
-        // Draw particle with opacity
+        // Draw star instead of circle
+        ctx.save();
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle * 2); // Rotate the star as it moves
+        
+        // Draw star shape
+        const spikes = 5;
+        const outerRadius = p.size;
+        const innerRadius = p.size / 2;
+        
+        for (let i = 0; i < spikes * 2; i++) {
+          const radius = i % 2 === 0 ? outerRadius : innerRadius;
+          const angle = (Math.PI / spikes) * i;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        
+        ctx.closePath();
         ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
         ctx.fill();
+        ctx.restore();
       }
 
       // Emit new particles periodically
@@ -363,12 +386,12 @@ export const ParticleButton = ({
             ${className}
           `}
           style={{
-            '--spread': '480deg',
-            '--shimmer-color': '#DEDEDE',
+            '--spread': '30deg',
+            '--shimmer-color': '#FFFFFF',
             '--radius': '10px',
             '--speed': '5s',
-            '--cut': '0.3em',
-            '--bg': '#FFFFFF',
+            '--cut': '0.4em',
+            '--bg': 'rgba(255, 255, 255, 0.2)',
             borderRadius: 'var(--radius)',
             background: 'var(--bg)'
           } as React.CSSProperties}
@@ -379,8 +402,8 @@ export const ParticleButton = ({
               <div 
                 className="absolute inset-0"
                 style={{
-                  background: 'conic-gradient(from calc(120deg - (var(--spread) * 0.5)), transparent 0, rgba(97, 97, 97, 0.8) var(--spread), transparent var(--spread))',
-                  opacity: '2'
+                  background: 'conic-gradient(from calc(120deg - (var(--spread) * 0.5)), transparent 0, rgba(0, 0, 0, 0.4) 5%, rgba(255, 255, 255, 0.9) 10%, transparent 15%)',
+                  opacity: '1'
                 }}
               />
             </div>
@@ -388,7 +411,7 @@ export const ParticleButton = ({
           <div 
             className="absolute inset-0"
             style={{
-              background: 'var(--bg)',
+              background: '#FFFFFF',
               borderRadius: 'var(--radius)',
               inset: 'var(--cut)'
             }}

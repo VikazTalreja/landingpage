@@ -24,16 +24,36 @@ type CarouselItem = {
 
 // Tags for marquee
 const tags = [
-  "Operational efficiency",
-  "Decrease costs per lead",
-  "Boost revenue growth",
-  "Save costs",
-  "Reach relevant prospects",
-  "Increase pipeline",
-  "Stay ahead of competition",
-  "Refine ICP",
-  "Lead qualification on autopilot",
-  "Boost Conversion Rates"
+	"Automate soft skill screening",
+	"Predict role fit",
+	"Shortlist faster",
+	"Boost quality of hire",
+	"Cut time-to-hire",
+	"Scale hiring with ease",
+	"Reduce HR load",
+	"Hire 24/7",
+	"Human-like voice agent",
+	"Improve candidate experience",
+	"Standardize interviews",
+	"Remove unconscious bias",
+	"Save recruiter hours",
+	"Reduce hiring costs",
+	"Unlock people insights",
+	"Spot high potential",
+	"Streamline assessments",
+	"Enable smart mobility",
+	"Power L&D decisions",
+	"Get fit scores instantly",
+	"Customize every interaction",
+	"Behavior-first hiring",
+	"Actionable interview data",
+	"Faster decision-making",
+	"Smarter talent strategy",
+	"Reduce mismatches",
+	"Hire with confidence",
+	"Speak across languages",
+	"Adaptive conversations",
+	"Voice-first evaluation",
 ];
 
 const TabSection = () => {
@@ -321,11 +341,11 @@ const TabSection = () => {
             }
             
             .animate-marquee {
-              animation: marquee 150s linear infinite;
+              animation: marquee 300s linear infinite;
             }
             
             .animate-marquee-reverse {
-              animation: marquee 150s linear infinite reverse;
+              animation: marquee 300s linear infinite reverse;
             }
             
             @keyframes fadeIn {
@@ -406,7 +426,7 @@ const TabSection = () => {
         <div className="tabs-wrapper bg-[#f5f1eb] p-10 rounded-3xl shadow-xl">
           {/* Header section */}
           <div className="layout406-tabs-heading-wrapper mb-10">
-            <div className="layout406-tabs-heading-top text-center md:text-left">
+            <div className="layout406-tabs-heading-top text-left md:text-left">
               <div className="tag-wrapper mb-3">
                 <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-medium">Meresu AI Platform</div>
               </div>
@@ -460,7 +480,7 @@ const TabSection = () => {
               {tabs.map((tab, index) => (
                 <div key={tab.id}>
                   <div 
-                    className={`cursor-pointer px-3 py-4 rounded-md transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${activeTab === tab.id ? 'border-t-2 border-amber-950 text-black ' : 'hover:bg-gray-100  md:text-amber-950/40'}`}
+                    className={`cursor-pointer px-3 py-4 rounded-md transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${activeTab === tab.id ? 'border-t-2 border-amber-950 text-black ' : 'hover:bg-gray-100 text-black  md:text-amber-950/40'}`}
                     onClick={() => setActiveTab(tab.id)}
                   > 
                     <h4 className="text-lg font-semibold mb-2">{tab.title}</h4>
