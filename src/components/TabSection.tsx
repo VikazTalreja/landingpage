@@ -313,7 +313,7 @@ const TabSection = () => {
   };
 
   return (
-    <div className="bg-[#0a2532] py-24 px-4">
+    <div className="bg-[#021129] py-24 px-4">
       <div className="max-w-7xl mx-auto">
       <div className="text-center text-white max-w-4xl mx-auto">
             <div className="mb-2">
@@ -363,7 +363,7 @@ const TabSection = () => {
           <div className="flex whitespace-nowrap mb-4 overflow-hidden">
             <div className="flex animate-marquee">
               {[...tags, ...tags, ...tags].map((tag, index) => (
-                <div key={`tag1-${index}`} className="flex items-center bg-[#143547] rounded-full px-4 py-2 mx-2 text-sm text-white">
+                <div key={`tag1-${index}`} className="flex items-center bg-[#021129] rounded-full px-4 py-2 mx-2 text-sm text-white">
                   <div className="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
                   <span>{tag}</span>
                 </div>
@@ -371,7 +371,7 @@ const TabSection = () => {
             </div>
             <div className="flex animate-marquee" aria-hidden="true">
               {[...tags, ...tags, ...tags].map((tag, index) => (
-                <div key={`tag1-copy-${index}`} className="flex items-center bg-[#143547] rounded-full px-4 py-2 mx-2 text-sm text-white">
+                <div key={`tag1-copy-${index}`} className="flex items-center bg-[#021129] rounded-full px-4 py-2 mx-2 text-sm text-white">
                   <div className="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
                   <span>{tag}</span>
                 </div>
@@ -383,7 +383,7 @@ const TabSection = () => {
           <div className="flex whitespace-nowrap mb-4 overflow-hidden">
             <div className="flex animate-marquee-reverse">
               {[...tags, ...tags, ...tags].map((tag, index) => (
-                <div key={`tag2-${index}`} className="flex items-center bg-[#143547] rounded-full px-4 py-2 mx-2 text-sm text-white">
+                <div key={`tag2-${index}`} className="flex items-center bg-[#021129] rounded-full px-4 py-2 mx-2 text-sm text-white">
                   <div className="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
                   <span>{tag}</span>
                 </div>
@@ -391,7 +391,7 @@ const TabSection = () => {
             </div>
             <div className="flex animate-marquee-reverse" aria-hidden="true">
               {[...tags, ...tags, ...tags].map((tag, index) => (
-                <div key={`tag2-copy-${index}`} className="flex items-center bg-[#143547] rounded-full px-4 py-2 mx-2 text-sm text-white">
+                <div key={`tag2-copy-${index}`} className="flex items-center bg-[#021129] rounded-full px-4 py-2 mx-2 text-sm text-white">
                   <div className="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
                   <span>{tag}</span>
                 </div>
@@ -403,7 +403,7 @@ const TabSection = () => {
           <div className="flex whitespace-nowrap mb-4 overflow-hidden">
             <div className="flex animate-marquee">
               {[...tags, ...tags, ...tags].map((tag, index) => (
-                <div key={`tag3-${index}`} className="flex items-center bg-[#143547] rounded-full px-4 py-2 mx-2 text-sm text-white">
+                <div key={`tag3-${index}`} className="flex items-center bg-[#021129] rounded-full px-4 py-2 mx-2 text-sm text-white">
                   <div className="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
                   <span>{tag}</span>
                 </div>
@@ -411,7 +411,7 @@ const TabSection = () => {
             </div>
             <div className="flex animate-marquee" aria-hidden="true">
               {[...tags, ...tags, ...tags].map((tag, index) => (
-                <div key={`tag3-copy-${index}`} className="flex items-center bg-[#143547] rounded-full px-4 py-2 mx-2 text-sm text-white">
+                <div key={`tag3-copy-${index}`} className="flex items-center bg-[#021129] rounded-full px-4 py-2 mx-2 text-sm text-white">
                   <div className="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
                   <span>{tag}</span>
                 </div>
@@ -420,7 +420,7 @@ const TabSection = () => {
           </div>
           
           {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a2532] via-transparent to-[#0a2532] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#021129] via-transparent to-[#021129] pointer-events-none"></div>
         </div>
 
         <div className="tabs-wrapper bg-[#f5f1eb] p-10 rounded-3xl shadow-xl">
